@@ -29,6 +29,21 @@ a link conflict under `/usr/local/bin`. Run
 would replace. If you accept those changes, run
 `brew link --overwrite python@3.12`, then retry the EasyPlate install.
 
+## Uninstall
+
+Stop EasyPlate with `Ctrl+C`, then uninstall its formula:
+
+```bash
+brew uninstall FupaulHuang/easyplate/easyplate
+```
+
+To also remove the formula's trust and this tap:
+
+```bash
+brew untrust --formula FupaulHuang/easyplate/easyplate
+brew untap FupaulHuang/easyplate
+```
+
 ## Check and update
 
 Run `brew test FupaulHuang/easyplate/easyplate` to test the installed command.
