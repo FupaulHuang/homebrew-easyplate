@@ -18,7 +18,14 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - name: Tap repository
-        run: brew tap FupaulHuang/easyplate
+        run: brew tap FupaulHuang/easyplate "$GITHUB_WORKSPACE"
+      - name: Resolve runner Python links on Intel
+        if: matrix.runner == 'macos-15-intel'
+        run: |
+          # The Intel image links python.org's Python 3.12 into /usr/local/bin.
+          # Homebrew installs its own Python but cannot link it over those files.
+          brew install python@3.12 || test -x "$(brew --prefix python@3.12)/bin/python3.12"
+          brew link --overwrite python@3.12
       - name: Trust and install formula
         run: |
           brew trust --formula FupaulHuang/easyplate/easyplate

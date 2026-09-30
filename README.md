@@ -23,6 +23,12 @@ The `brew trust` command explicitly trusts this non-official formula after you
 review it. Homebrew may ask for trust during installation if that step is
 omitted.
 
+On an Intel Mac with a separate Python 3.12 installation, Homebrew may report
+a link conflict under `/usr/local/bin`. Run
+`brew link --overwrite python@3.12 --dry-run` to review the links Homebrew
+would replace. If you accept those changes, run
+`brew link --overwrite python@3.12`, then retry the EasyPlate install.
+
 ## Check and update
 
 Run `brew test FupaulHuang/easyplate/easyplate` to test the installed command.
