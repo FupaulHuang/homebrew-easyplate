@@ -1,0 +1,29 @@
+name: Test Homebrew formula
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  install:
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [macos-15, macos-15-intel]
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v7
+      - name: Tap repository
+        run: brew tap FupaulHuang/easyplate
+      - name: Trust and install formula
+        run: |
+          brew trust --formula FupaulHuang/easyplate/easyplate
+          brew install FupaulHuang/easyplate/easyplate
+      - name: Test command
+        run: |
+          brew test FupaulHuang/easyplate/easyplate
+          easyplate --help
