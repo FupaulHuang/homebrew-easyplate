@@ -23,6 +23,17 @@ The `brew trust` command explicitly trusts this non-official formula after you
 review it. Homebrew may ask for trust during installation if that step is
 omitted.
 
+The formula installs Homebrew Python 3.12 as its default interpreter. EasyPlate
+also works with Python 3.10 or newer. To use another installed version, set
+`EASYPLATE_PYTHON` to that Python executable when starting the app:
+
+```bash
+EASYPLATE_PYTHON=/path/to/python3.11 easyplate
+```
+
+The Homebrew Python 3.12 dependency remains installed even when an alternate
+interpreter is selected. The launcher checks the selected Python's version.
+
 On an Intel Mac with a separate Python 3.12 installation, Homebrew may report
 a link conflict under `/usr/local/bin`. Run
 `brew link --overwrite python@3.12 --dry-run` to review the links Homebrew

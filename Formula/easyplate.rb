@@ -4,6 +4,7 @@ class Easyplate < Formula
   homepage "https://github.com/FupaulHuang/EasyPlate"
   url "https://github.com/FupaulHuang/EasyPlate/archive/refs/tags/v0.1.0.tar.gz"
   sha256 "f08907dba424c0e83faabf4cde904fc6087ae2ffad0efb4ab22edc9613230c70"
+  revision 1
   license "MIT"
 
   depends_on "python@3.12"
@@ -18,7 +19,12 @@ class Easyplate < Formula
     python = Formula["python@3.12"].opt_bin/"python3.12"
     (bin/"easyplate").write <<~SH
       #!/bin/sh
-      exec "#{python}" "#{libexec}/easyplate_cli.py" "$@"
+      python="${EASYPLATE_PYTHON:-#{python}}"
+      if ! "$python" -c 'import sys; sys.exit(0 if sys.version_info >= (3, 10) else 1)' >/dev/null 2>&1; then
+        echo "EasyPlate requires Python 3.10 or newer. Set EASYPLATE_PYTHON to a supported Python executable." >&2
+        exit 1
+      fi
+      exec "$python" "#{libexec}/easyplate_cli.py" "$@"
     SH
     (bin/"easyplate").chmod 0755
   end
