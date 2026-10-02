@@ -2,9 +2,8 @@
 class Easyplate < Formula
   desc "Local browser tool for sample plate layouts and annotations"
   homepage "https://github.com/FupaulHuang/EasyPlate"
-  url "https://github.com/FupaulHuang/EasyPlate/archive/refs/tags/v0.1.0.tar.gz"
-  sha256 "f08907dba424c0e83faabf4cde904fc6087ae2ffad0efb4ab22edc9613230c70"
-  revision 1
+  url "https://github.com/FupaulHuang/EasyPlate/archive/refs/tags/v0.1.1.tar.gz"
+  sha256 "d5c37be209fc2f3404676c34aa75c73126998e04bbb10eb3ee4a76a737cb0dc1"
   license "MIT"
 
   depends_on "python@3.12"
