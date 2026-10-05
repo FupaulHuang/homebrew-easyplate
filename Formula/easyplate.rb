@@ -2,14 +2,15 @@
 class Easyplate < Formula
   desc "Local browser tool for sample plate layouts and annotations"
   homepage "https://github.com/FupaulHuang/EasyPlate"
-  url "https://github.com/FupaulHuang/EasyPlate/archive/refs/tags/v0.1.1.tar.gz"
-  sha256 "f8cbb03201bdbce19b87a179f51561054793e3b15c39951f2b4fd44c02eafba4"
+  url "https://github.com/FupaulHuang/EasyPlate/archive/refs/tags/v0.1.2.tar.gz"
+  sha256 "b09495c4a3359c014bca8faa96f2b6a171b50d42916a2e0c6b69b74bb4a1120e"
   license "MIT"
 
   depends_on "python@3.12"
 
   def install
-    libexec.install "index.html", "app.js", "styles.css", "server.py", "README.md", "AGENTS.md", "LICENSE"
+    libexec.install "index.html", "app.js", "xlsx.js", "styles.css", "server.py", "README.md", "AGENTS.md", "LICENSE"
+    (libexec/"docs").install "docs/easyplate-browser.png"
     (libexec/"easyplate_cli.py").write <<~PY
       from server import launch
       launch()
