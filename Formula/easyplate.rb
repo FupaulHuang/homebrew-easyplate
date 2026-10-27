@@ -2,14 +2,15 @@
 class Easyplate < Formula
   desc "Local browser tool for sample plate layouts and annotations"
   homepage "https://github.com/FupaulHuang/EasyPlate"
-  url "https://github.com/FupaulHuang/EasyPlate/archive/refs/tags/v0.1.3.tar.gz"
-  sha256 "d842d668a61107062d31a4a0fc2367782583106d6c279c1d99eed77e9049aa0d"
+  url "https://github.com/FupaulHuang/EasyPlate/archive/refs/tags/v0.1.4.tar.gz"
+  sha256 "c3a67a98399f13e59054dc49c64b7c130a06806c00371fe9655539bce3ebdb60"
   license "MIT"
 
   depends_on "python@3.12"
 
   def install
-    libexec.install "index.html", "app.js", "xlsx.js", "styles.css", "server.py", "README.md", "AGENTS.md", "LICENSE"
+    libexec.install "index.html", "app.js", "xlsx.js", "styles.css", "server.py", "updater.py", "README.md", "AGENTS.md", "LICENSE"
+    (libexec/".easyplate-homebrew").write "#{HOMEBREW_PREFIX}/bin/brew\n"
     (libexec/"docs").install "docs/easyplate-browser.png"
     (libexec/"easyplate_cli.py").write <<~PY
       from server import launch
@@ -31,5 +32,7 @@ class Easyplate < Formula
 
   test do
     assert_match "Start the local EasyPlate browser app", shell_output("#{bin}/easyplate --help")
+    assert_match "EasyPlate", shell_output("#{bin}/easyplate --version")
+    assert_match "--check", shell_output("#{bin}/easyplate update --help")
   end
 end
